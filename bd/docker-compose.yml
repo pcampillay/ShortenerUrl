@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  mongodb-dev:
+    container_name: 'mongodb-dev'
+    image: 'mongo:latest'
+    restart: always
+    networks:
+      - mongodb-dev-api
+    ports:
+      - "27017:27017"
+    volumes:
+      - 'mongodb_dev_data:/data'
+
+volumes:
+  mongodb_dev_data:
+    driver: local
+
+networks:
+  mongodb-dev-api:
+    driver: bridge
+    name: mongodb-dev-api

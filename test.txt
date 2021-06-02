@@ -1,0 +1,93 @@
+Technical exam
+
+URL Shortener
+	In this exercise you will build a backend and a frontend that will provide the basic functionality behind URL-shortening services like bit.ly or Google URL Shortener.
+
+Back end:
+
+The server needs to support 3 endpoints:
+
+POST /shorten
+    * Receives a POST with a url-encoded payload like this: url=http://www.xepelin.com/my-url
+    * If the URL is not registered in the system, it stores the URL along with a unique ID and the domain of the URL
+    * The server sends the ID in the response, using status code 201
+    * If the URL was already in the system, it fetches the ID and sends it with status code 208
+
+GET /:id
+    * Receives an ID, fetches the URL from an storage
+    * If it exists, return the given url
+    * If it doesn't, the server responds with status code 404
+
+GET /domain
+    * Respond with a list of all the domains registered in the DB.
+    * The domain should not include the protocol but includes subdomains (f.e www.xepelin.com -> xepelin.com)
+
+Extra:
+POST /register
+    * It should register a new user, with an username and password.
+
+POST /login
+		* If should accept an username and password, and if they are correct, 
+			it should return a login. token
+
+Requirements
+    * The server must work correctly, based on the functionality described above
+    * The server must store the data, in a DB like mongoDB or local storage
+    * Any code you use to setup or debug needs to be included, either as server endpoints or separate files
+    * Don’t copy-paste code from the internet other than specific syntax-libraries.
+
+Helper libraries
+In order to save you time looking for libraries, here are some you can use. This is not a requirement.
+    * Express / Koa.js: HTTP server
+    * body-parser: Parse incoming POST data from forms (Express)
+    * shortid: ShortId creates short non-sequential url-friendly unique ids
+    * data-store: for storing the data.
+
+Example Boilerplate
+
+	There is an attached boilerplate that uses express, data-store and body-parser if you want to use as a base.
+
+app.js:
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const store = require('data-store')({ path: process.cwd() + '/shortener.json' });
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/', function (req, res) {
+  const data = store.get('data');
+  const resData = data ? data : {response: 'no data'};
+  res.json(resData);
+});
+
+app.post('/', function (req, res) {
+  const testdata = req.body && req.body.testdata ? req.body.testdata : 'empty data';
+  store.set('data', { testdata });
+  res.send('Data saved');
+});
+
+app.listen(3003, function () {
+  console.log('express shortener url listening to port 3003');
+});
+
+package.json
+{
+  "name": "shortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "data-store": "^4.0.3",
+    "express": "^4.17.1",
+    "node-localstorage": "^1.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
