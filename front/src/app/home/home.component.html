@@ -1,17 +1,39 @@
-<mat-toolbar color="primary">
-      <span>Technical exam </span>
-      <span>-</span>
-      <span>URL Shortener</span>
+<mat-toolbar color="accent">
+    <span>Technical exam </span>
+    <span>-</span>
+    <span>URL Shortener</span>
 </mat-toolbar>
 
 <div class="container">
     <div class="inner-container">
+        
+        <mat-card class="table-card">
+            <form [formGroup]="urlForm" (submit)="submit()">
+                <mat-form-field color="accent" appearance="outline">
+                    <mat-label>Url</mat-label>
+                    <input formControlName="url" matInput #input  placeholder="Ingrese url" class="input-form">
+                </mat-form-field>
+                <button mat-raised-button color="accent" class="button-form" type="submit">Crear url</button>
+            </form>
+        </mat-card>
+
         <mat-card class="table-card">
             <mat-list role="list">
-                <mat-list-item role="listitem">Item 1</mat-list-item>
-                <mat-list-item role="listitem">Item 2</mat-list-item>
-                <mat-list-item role="listitem">Item 3</mat-list-item>
-              </mat-list>
+                <div *ngFor="let list of getUrls">
+                    <mat-expansion-panel class="list" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{ list.domain }}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let list2 of list.urls">
+                            <mat-list-item class="list2" role="listitem">
+                                {{ list2.url }}
+                            </mat-list-item>
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+            </mat-list>
         </mat-card>
     </div>
 </div>
