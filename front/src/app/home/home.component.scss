@@ -1,0 +1,19 @@
+mat-toolbar span {
+    margin-left: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.inner-container {
+    width: 80%;
+    max-width: 100%;
+    overflow: auto;
+    margin-top: 50px;
+}
+
+.table-card{
+    max-width: 100%;
+}
