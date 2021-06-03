@@ -6,14 +6,15 @@
   - api in nodejs
   - BD MongoDB
   - front Angular
-### Primero Levantar bd
+  - needed docker for raise bd
+### First up bd
 
 ```sh
 $ cd bd
 $ docker-compose up -d
 ```
 
-### Segundo Levantar back
+### Second up back
 
 ```sh
 $ cd backend
@@ -22,7 +23,7 @@ $ npm start
 // puerto 3003
 ```
 
-### Tercero Levantar front
+### Third up front
 
 ```sh
 $ cd front
@@ -30,4 +31,4 @@ $ npm i
 $ ng serve
 ```
 
-#### Abrir navegador localhost:4200
+#### open browser localhost:4200
