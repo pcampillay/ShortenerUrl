@@ -91,3 +91,19 @@ package.json
   "author": "",
   "license": "ISC"
 }
+
+
+Front end
+
+1.- Create an app that connects to the shortener API with the given requirements:
+	- In the home, it should have a list of all Domains registered
+	- The domain should be able to be clicked and when this action is taken,
+		it should list all the URLs registered to that domain.
+	- It should have a action button to add a new short url
+
+Extra:
+	- Use Material UI
+  - Paginate the domain list with infinite scroll  
+	- Add a login funcionality to the app
+	- Add a register flow to the app
+	

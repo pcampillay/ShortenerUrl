@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const shortenerSchema = new Schema(
     {
         url: { type: String },
-        code: { type: String}
+        domain: { type: String },
+        code: { type: String }
     }, { timestamps: { createdAt: 'created_at' } }
 );
 
