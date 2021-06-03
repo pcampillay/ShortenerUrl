@@ -30,7 +30,7 @@ exports.CreateShortener = async function (req, res) {
     try {
         let response;
         const url = req.body.url;
-
+        
         if(typeof url !== 'string'){
             response = { status: "400", message: "Error url not Valid" };
             res.status(400).send(response);
@@ -77,5 +77,25 @@ async function codeRandom() {
     }
     else {
         codeRandom();
+    }
+}
+
+//Get Domain
+exports.GetDomains = async function (req, res) {
+    try {
+        const domains = await shortenerModel.find({},{
+            "_id": 0,
+            "url": 1,
+            "domain": 1,
+            "code": 1
+        });
+
+        response = { status: "200", message: "Valid shortener url", domains: domains };
+        res.status(200).send(response);
+
+    } catch (error) {
+        console.log("error => ", error);
+        const response = { status: "500", message: "Error Valid shortener" };
+        res.status(500).send(response);
     }
 }
